@@ -129,7 +129,7 @@ ENTRANCE can be either a file path, or a "x" string as in bundle exec "x".
 
 ### Compiling a Gem
 
-	rubyc --gem=bundler bundle
+	rubyc --gem=bundler --gem-version=1.15.4 bundle
 	./a.out (or a.exe on Windows)
 
 ## See Also
