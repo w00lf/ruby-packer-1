@@ -401,7 +401,7 @@ AS_CASE(["$target_os"],
 AC_SUBST(LD)
 AS_IF([test "$GCC" = yes], [
     linker_flag=-Wl,
-    : ${optflags=-O3}
+    : ${optflags=-O1}
     gcc_major=`echo =__GNUC__ | $CC -E -xc - | sed '/^=/!d;s///'`
     gcc_minor=`echo =__GNUC_MINOR__ | $CC -E -xc - | sed '/^=/!d;s///'`
     test -n "$gcc_major" || gcc_major=0
@@ -908,7 +908,7 @@ AS_IF([test "$GCC" = yes], [
     # suppress annoying -Wstrict-overflow warnings
     RUBY_TRY_CFLAGS(-fno-strict-overflow, [RUBY_APPEND_OPTION(XCFLAGS, -fno-strict-overflow)])
 
-    test "${debugflags+set}" || {RUBY_TRY_CFLAGS(-ggdb3, [debugflags=-ggdb3])}
+    test "${debugflags+set}" || {RUBY_TRY_CFLAGS(-g0, [debugflags=-g0])}
     test "${debugflags+set}" || {RUBY_TRY_CFLAGS(-ggdb, [debugflags=-ggdb])}
     test "${debugflags+set}" || {RUBY_TRY_CFLAGS(-g3, [debugflags=-g3])}
 ])
