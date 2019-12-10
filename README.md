@@ -80,6 +80,10 @@ Unzip it. Optionally,
 rename it to `rubyc.exe` and put it under `C:\Windows` (or any other directory that is part of `PATH`).
 Execute `rubyc --help` from the command line.
 
+### Clang on windows
+
+	ruby -Ilib bin\rubyc bin\rubyc -c -o rubyc --nmake-args=CC=clang-cl
+
 ## Usage
 
 If ENTRANCE was not provided, then a single Ruby interpreter executable will be produced.
