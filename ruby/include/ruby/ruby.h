@@ -542,9 +542,7 @@ static inline int rb_type(VALUE obj);
 	rb_gc_guarded_ptr; \
     }))
 #elif defined _MSC_VER
-#pragma optimize("", off)
 static inline volatile VALUE *rb_gc_guarded_ptr(volatile VALUE *ptr) {return ptr;}
-#pragma optimize("", on)
 #define RB_GC_GUARD(v) (*rb_gc_guarded_ptr(&(v)))
 #else
 volatile VALUE *rb_gc_guarded_ptr_val(volatile VALUE *ptr, VALUE val);
@@ -912,10 +910,9 @@ struct RObject {
 
 #define RClass RClassDeprecated
 #ifndef __cplusplus
-DEPRECATED_TYPE(("RClass is internal use only"),
 struct RClass {
     struct RBasic basic;
-});
+};
 #endif
 #define RCLASS_SUPER(c) rb_class_get_superclass(c)
 #define RMODULE_IV_TBL(m) RCLASS_IV_TBL(m)
