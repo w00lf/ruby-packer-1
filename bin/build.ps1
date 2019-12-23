@@ -31,6 +31,9 @@ $env:path
 $env:path += ";C:\Program Files\LLVM\bin"
 $env:path
 
+#ruby version
+ruby -v
+
 # Test clang
 clang-cl -v
 
