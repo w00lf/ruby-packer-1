@@ -58,5 +58,6 @@ function Unzip
 #.\rubyc\rubyc-v0.4.0-x64.exe --clean-tmpdir -o build\metanorma bin\metanorma
 
 # building rubyc
-ruby -Ilib bin\rubyc bin\rubyc -c -o rubyc --nmake-args=CC=clang-cl
-ruby -Ilib bin\rubyc bin\rubyc -o rubyc --nmake-args=CC=clang-cl
+ruby -Ilib bin\rubyc bin\rubyc -c -o rubyc
+#ruby -Ilib bin\rubyc bin\rubyc -c -o rubyc --nmake-args=CC=clang-cl
+#ruby -Ilib bin\rubyc bin\rubyc -o rubyc --nmake-args=CC=clang-cl
