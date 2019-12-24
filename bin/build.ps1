@@ -23,6 +23,7 @@ cl
 
 # Search for clang-cl
 # dir -Path C:\ -Filter clang-cl.exe -Recurse
+dir -Path 'C:\Program Files (x86)' -Filter vcvars64.bat -Recurse
 
 #echo path
 refreshenv
