@@ -1,0 +1,56 @@
+name: compile_windows
+
+# Removed pull request trigger - causes to 2 heavy simultaneously jobs to execute
+on: [push]
+
+jobs:
+  build_windows:
+    runs-on: windows-2016
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-ruby@v1
+      with:
+       ruby-version: '2.4'
+    - name: gem version
+      run: gem -v
+    - name: rubygems update
+      run: gem update --system 2.6.14
+    #- name: ruby choco install
+    #  run: choco install ruby
+    - name: gem version
+      run: gem -v
+    - name: Install winflexbison
+      run: choco install --yes winflexbison
+    - name: Install squashfs
+      run: choco install --yes squashfs
+    - name: Check swap
+      run: systeminfo 
+    - name: install clang
+      run: choco install --yes llvm
+    - name: Run build
+      env:
+        # CC: "cl -nologo"
+        # LD: "cl -nologo"
+        # LDSHARED: "cl -nologo -LD"
+        # # CPPFLAGS: "-fno-use-linker-plugin"
+        LIBSASS_STATIC_LIB: 1
+      run: PowerShell.exe bin\build.ps1
+    # - name: Install dependencies
+    #   run: brew install squashfs
+    # - name: Download and install rubyc
+    #   run: curl -L http://enclose.io/rubyc/rubyc-darwin-x64.gz | gunzip > rubyc && chmod +x rubyc
+    # - name: run build
+    #   run: make build
+    # - name: Test created binary on sample file
+    #   run: ./build/metanorma --type iso -x html ./sources/iso/iso-rice-en.adoc
+    # - name: Copy release binary
+    #   run: cp build/metanorma metanorma-darwin-x64
+    # - name: Set release binary permissions
+    #   run: chmod a+x metanorma-darwin-x64
+    # - name: Release binary
+    #   uses: softprops/action-gh-release@v1
+    #   if: startsWith(github.ref, 'refs/tags/')
+    #   with:
+    #     files: metanorma-darwin-x64
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
