@@ -32,6 +32,8 @@ class Compiler
           if Hash === args.first
             env = args.first
             env = env.map { |name, value|
+              next if value.nil?
+              
               value = escape(value)
               [name, value].join("=")
             }.join(" ")

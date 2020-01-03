@@ -377,11 +377,11 @@ class Compiler
         unless File.exist?(@ruby_build_1)
           @compile_env['ENCLOSE_IO_RUBYC_1ST_PASS'] = '1'
           @compile_env['ENCLOSE_IO_RUBYC_2ND_PASS'] = nil
-          # enclose_io_memfs.o - 1st pass
-          Dir.chdir(pass_1) do
-            @utils.run(@compile_env, "call #{@utils.escape @ruby_dir}\\win32\\configure.bat \
-                                    --disable-install-doc \
-                                    --prefix=#{@utils.escape @ruby_build_1}")
+          # Call configure.bat from within @vendor_ruby directory 
+          Dir.chdir(pass_1) do         
+            @utils.run(@compile_env, "call #{@utils.escape "#{@ruby_dir}/win32/configure.bat"} \
+                                      --disable-install-doc \
+                                      --prefix=#{@utils.escape @ruby_build_1}")          # enclose_io_memfs.o - 1st pass   
             @utils.run(@compile_env, "nmake #{@options[:nmake_args]}")
             @utils.run(@compile_env, "nmake install")
             File.open(File.join(@ruby_dir, 'ext', 'Setup'), 'w') do |f|
@@ -430,7 +430,7 @@ class Compiler
         @compile_env['ENCLOSE_IO_RUBYC_1ST_PASS'] = nil
         @compile_env['ENCLOSE_IO_RUBYC_2ND_PASS'] = '1'
         Dir.chdir(pass_2) do
-          @utils.run(@compile_env, "call #{@utils.escape @ruby_dir}\\win32\\configure.bat \
+          @utils.run(@compile_env, "call #{@utils.escape "#{@ruby_dir}/win32/configure.bat"} \
                                   --prefix=#{@utils.escape @ruby_build_2} \
                                   --enable-bundled-libyaml \
                                   --enable-debug-env \
